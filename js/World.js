@@ -28,6 +28,10 @@ var roomGrid =
 
 ];
 
+function tileTypeHasTransparency(checkTileType) {
+    return (checkTileType === TILE_GOAL || checkTileType === TILE_KEY || checkTileType === TILE_DOOR);
+}
+
 function roomTileToIndex(tileCol, tileRow) {
     return tileCol + tileRow * ROOM_COLS;
 }
@@ -57,6 +61,9 @@ function drawRoom() {
     for (var row = 0; row < ROOM_ROWS; row++) {
         for (var col = 0; col < ROOM_COLS; col++) {
             var tileType = roomGrid[tileIndex];
+            if (tileTypeHasTransparency(tileType)) {
+                canvasContext.drawImage(tilePics[TILE_GROUND], tileX, tileY);
+            }
             canvasContext.drawImage(tilePics[tileType], tileX, tileY);
             tileIndex++;
             tileX += ROOM_WIDTH;
