@@ -5,13 +5,13 @@ var picsToLoad = 0;
 
 function loadImages() {
     const imageList = [
-        { varName: playerPic, fileName: "player1.png" },
+        { varName: playerPic, fileName: "warrior.png" },
 
-        { trackType: TRACK_ROAD, fileName: "track_road.png" },
-        { trackType: TRACK_WALL, fileName: "track_wall.png" },
-        { trackType: TRACK_GOAL, fileName: "track_goal.png" },
-        { trackType: TRACK_TREE, fileName: "track_tree.png" },
-        { trackType: TRACK_FLAG, fileName: "track_flag.png" }
+        { trackType: TRACK_ROAD, fileName: "world_ground.png" },
+        { trackType: TRACK_WALL, fileName: "world_wall.png" },
+        { trackType: TRACK_GOAL, fileName: "world_goal.png" },
+        { trackType: TRACK_TREE, fileName: "world_key.png" },
+        { trackType: TRACK_FLAG, fileName: "world_door.png" }
     ];
     picsToLoad = imageList.length;
 
