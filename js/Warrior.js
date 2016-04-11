@@ -41,12 +41,12 @@ function WarriorClass() {
             nextX += -PLAYER_MOVE_SPEED;
         }
 
-        const nextTileType = getTrackAtPixelCoord(nextX, nextY);
-        if (nextTileType === TRACK_ROAD) {
+        const nextTileType = getTileAtPixelCoord(nextX, nextY);
+        if (nextTileType === TILE_GROUND) {
             this.x = nextX;
             this.y = nextY;
         }
-        else if (nextTileType === TRACK_GOAL) {
+        else if (nextTileType === TILE_GOAL) {
             document.getElementById("debugText").innerHTML = `${this.myName} won the race.`;
             this.reset();
 
@@ -55,13 +55,13 @@ function WarriorClass() {
 
     this.reset = function() {
         if (this.homeX == undefined) {
-            for (let i = 0; i < trackGrid.length; i++) {
-                if (trackGrid[i] === TRACK_PLAYER) {
-                    const tileRow = Math.floor(i / TRACK_COLS);
-                    const tileCol = i % TRACK_COLS;
-                    this.homeX = tileCol * TRACK_WIDTH + 0.5 * TRACK_WIDTH;
-                    this.homeY = tileRow * TRACK_HEIGHT + 0.5 * TRACK_HEIGHT;
-                    trackGrid[i] = TRACK_ROAD;
+            for (let i = 0; i < roomGrid.length; i++) {
+                if (roomGrid[i] === TILE_PLAYER) {
+                    const tileRow = Math.floor(i / ROOM_COLS);
+                    const tileCol = i % ROOM_COLS;
+                    this.homeX = tileCol * ROOM_WIDTH + 0.5 * ROOM_WIDTH;
+                    this.homeY = tileRow * ROOM_HEIGHT + 0.5 * ROOM_HEIGHT;
+                    roomGrid[i] = TILE_GROUND;
                     break;
                 }
             }

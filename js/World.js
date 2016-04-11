@@ -1,17 +1,17 @@
-const TRACK_WIDTH = 50;
-const TRACK_HEIGHT = 50;
-const TRACK_COLS = 16;
-const TRACK_ROWS = 12;
+const ROOM_WIDTH = 50;
+const ROOM_HEIGHT = 50;
+const ROOM_COLS = 16;
+const ROOM_ROWS = 12;
 
-const TRACK_ROAD = 0;
-const TRACK_WALL = 1;
-const TRACK_PLAYER = 2;
-const TRACK_GOAL = 3;
-const TRACK_TREE = 4;
-const TRACK_FLAG = 5;
+const TILE_GROUND = 0;
+const TILE_WALL = 1;
+const TILE_PLAYER = 2;
+const TILE_GOAL = 3;
+const TILE_KEY = 4;
+const TILE_DOOR = 5;
 
 
-var trackGrid =
+var roomGrid =
 [
     4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
     4, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
@@ -28,40 +28,40 @@ var trackGrid =
 
 ];
 
-function trackTileToIndex(tileCol, tileRow) {
-    return tileCol + tileRow * TRACK_COLS;
+function roomTileToIndex(tileCol, tileRow) {
+    return tileCol + tileRow * ROOM_COLS;
 }
 
 function isWallAtTileCoord(trackTileCol, trackTileRow) {
-    var trackIndex = trackTileToIndex(trackTileCol, trackTileRow);
-    return (trackGrid[trackIndex] === TRACK_WALL);
+    var trackIndex = roomTileToIndex(trackTileCol, trackTileRow);
+    return (roomGrid[trackIndex] === TILE_WALL);
 }
 
-function getTrackAtPixelCoord(pixelX, pixelY) {
-    var tileCol = Math.floor(pixelX / TRACK_WIDTH);
-    var tileRow = Math.floor(pixelY / TRACK_HEIGHT);
+function getTileAtPixelCoord(pixelX, pixelY) {
+    var tileCol = Math.floor(pixelX / ROOM_WIDTH);
+    var tileRow = Math.floor(pixelY / ROOM_HEIGHT);
 
-    if (tileCol < 0 || tileCol >= TRACK_COLS || tileRow < 0 || tileRow >= TRACK_ROWS) {
-        return TRACK_WALL;
+    if (tileCol < 0 || tileCol >= ROOM_COLS || tileRow < 0 || tileRow >= ROOM_ROWS) {
+        return TILE_WALL;
     }
 
-    var trackIndex = trackTileToIndex(tileCol, tileRow);
-    return trackGrid[trackIndex];
+    var tileIndex = roomTileToIndex(tileCol, tileRow);
+    return roomGrid[tileIndex];
 }
 
-function drawTiles() {
+function drawRoom() {
 
-    var trackIndex = 0;
-    var trackX = 0;
-    var trackY = 0;
-    for (var row = 0; row < TRACK_ROWS; row++) {
-        for (var col = 0; col < TRACK_COLS; col++) {
-            var trackType = trackGrid[trackIndex];
-            canvasContext.drawImage(trackPics[trackType], trackX, trackY);
-            trackIndex++;
-            trackX += TRACK_WIDTH;
+    var tileIndex = 0;
+    var tileX = 0;
+    var tileY = 0;
+    for (var row = 0; row < ROOM_ROWS; row++) {
+        for (var col = 0; col < ROOM_COLS; col++) {
+            var tileType = roomGrid[tileIndex];
+            canvasContext.drawImage(tilePics[tileType], tileX, tileY);
+            tileIndex++;
+            tileX += ROOM_WIDTH;
         }
-        trackX = 0;
-        trackY += TRACK_HEIGHT;
+        tileX = 0;
+        tileY += ROOM_HEIGHT;
     }
 }
