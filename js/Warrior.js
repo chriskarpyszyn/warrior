@@ -74,7 +74,7 @@ function WarriorClass() {
         this.keysHeld = 0;
 
         if (this.homeX == undefined) {
-            for (let i = 0; i < roomGrid.length; i++) {
+            for (var i = 0; i < roomGrid.length; i++) {
                 if (roomGrid[i] === TILE_PLAYER) {
                     const tileRow = Math.floor(i / ROOM_COLS);
                     const tileCol = i % ROOM_COLS;

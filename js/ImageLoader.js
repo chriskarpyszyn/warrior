@@ -15,7 +15,7 @@ function loadImages() {
     ];
     picsToLoad = imageList.length;
 
-    for (let i = 0; i < imageList.length; i++) {
+    for (var i = 0; i < imageList.length; i++) {
         if (imageList[i].trackType != undefined) {
             loadImagesForTileCode(imageList[i].trackType, imageList[i].fileName);
         } else {
