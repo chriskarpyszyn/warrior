@@ -1,4 +1,4 @@
-const PLAYER_MOVE_SPEED = 3;
+const PLAYER_MOVE_SPEED = 5;
 
 
 function WarriorClass() {
@@ -42,18 +42,35 @@ function WarriorClass() {
         }
 
         const nextTileType = getTileAtPixelCoord(nextX, nextY);
-        if (nextTileType === TILE_GROUND) {
+        const nextTileIndex = getTileIndexAtPixelCoord(nextX, nextY);
+        switch (nextTileType) {
+        case TILE_GROUND:
             this.x = nextX;
             this.y = nextY;
-        }
-        else if (nextTileType === TILE_GOAL) {
+            break;
+        case TILE_GOAL:
             document.getElementById("debugText").innerHTML = `${this.myName} won the race.`;
             this.reset();
-
-        } 
+            break;
+        case TILE_DOOR:
+            if (this.keysHeld > 0) {
+                this.keysHeld--;
+                roomGrid[nextTileIndex] = TILE_GROUND;
+            }
+            break;
+        case TILE_KEY:
+            this.keysHeld++;
+            roomGrid[nextTileIndex] = TILE_GROUND;
+            break;
+            case TILE_WALL:
+            default:
+                break;
+        }
     }
 
-    this.reset = function() {
+    this.reset = function () {
+        this.keysHeld = 0;
+
         if (this.homeX == undefined) {
             for (let i = 0; i < roomGrid.length; i++) {
                 if (roomGrid[i] === TILE_PLAYER) {

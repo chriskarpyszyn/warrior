@@ -18,11 +18,11 @@ var roomGrid =
     1, 0, 4, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
     1, 0, 0, 1, 0, 0, 1, 1, 1, 5, 1, 1, 1, 5, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 0, 1, 1, 1,
     1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 0, 1, 4, 1,
     1, 4, 0, 1, 0, 0, 1, 0, 1, 3, 3, 1, 0, 5, 4, 1,
     1, 0, 0, 5, 0, 0, 5, 0, 5, 0, 3, 1, 0, 1, 1, 1,
-    1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 4, 1, 1,
+    1, 0, 0, 1, 0, 0, 1, 4, 1, 1, 1, 1, 0, 0, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 
@@ -51,6 +51,19 @@ function getTileAtPixelCoord(pixelX, pixelY) {
 
     var tileIndex = roomTileToIndex(tileCol, tileRow);
     return roomGrid[tileIndex];
+}
+
+function getTileIndexAtPixelCoord(pixelX, pixelY) {
+    var tileCol = Math.floor(pixelX / ROOM_WIDTH);
+    var tileRow = Math.floor(pixelY / ROOM_HEIGHT);
+
+
+    if (tileCol < 0 || tileCol >= ROOM_COLS || tileRow < 0 || tileRow >= ROOM_ROWS) {
+        return undefined;
+    }
+
+    var tileIndex = roomTileToIndex(tileCol, tileRow);
+    return tileIndex;
 }
 
 function drawRoom() {
