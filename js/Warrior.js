@@ -56,11 +56,13 @@ function WarriorClass() {
             if (this.keysHeld > 0) {
                 this.keysHeld--;
                 roomGrid[nextTileIndex] = TILE_GROUND;
+                document.getElementById("debugText").innerHTML = `Keys in inventory: ${this.keysHeld}`
             }
             break;
         case TILE_KEY:
             this.keysHeld++;
             roomGrid[nextTileIndex] = TILE_GROUND;
+            document.getElementById("debugText").innerHTML = `Keys in inventory: ${this.keysHeld}`
             break;
             case TILE_WALL:
             default:
